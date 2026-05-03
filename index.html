@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CineStar | The Amazing Digital Circus – Book Tickets</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0b0f;
+      font-family: 'Montserrat', sans-serif;
+      color: #f2f2f2;
+    }
+
+    .top-nav {
+      background: #101010;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 0.9rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-area {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #F5B042 0%, #E68A2E 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .tagline {
+      font-size: 0.75rem;
+      color: #aaa;
+      border-left: 1px solid #333;
+      padding-left: 12px;
+    }
+    .location-badge {
+      background: #1e1e24;
+      border-radius: 40px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .location-badge i {
+      color: #F5B042;
+    }
+
+    .movie-hero {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: #F5B042;
+      text-decoration: none;
+    }
+    .breadcrumb i {
+      font-size: 0.7rem;
+      margin: 0 5px;
+    }
+
+    .movie-detail-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      background: #0f0f14;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      border: 1px solid #252525;
+    }
+    .movie-poster-placeholder {
+      flex: 0 0 200px;
+      background: linear-gradient(145deg, #1f1f2a, #0c0c12);
+      border-radius: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 0.5rem;
+      text-align: center;
+      border: 1px solid #F5B04240;
+    }
+    .movie-poster-placeholder i {
+      font-size: 4rem;
+      color: #F5B042;
+      margin-bottom: 1rem;
+    }
+    .movie-info {
+      flex: 3;
+    }
+    .movie-info h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #fff, #ffd7a0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .movie-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+    .movie-meta span {
+      background: #1c1c24;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+    }
+    .description {
+      margin-top: 1rem;
+      line-height: 1.5;
+      color: #cdcddd;
+      max-width: 85%;
+    }
+
+    .booking-panel {
+      background: #0a0a0e;
+      border-radius: 2rem;
+      padding: 2rem;
+      margin-top: 1rem;
+      border: 1px solid #2a2a32;
+      backdrop-filter: blur(2px);
+    }
+
+    .booking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #2e2e38;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .booking-header h3 {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+    .booking-header h3 i {
+      color: #F5B042;
+      margin-right: 10px;
+    }
+
+    .selector-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .selector-item {
+      background: #111118;
+      border-radius: 1.2rem;
+      padding: 1rem 1.5rem;
+    }
+    .selector-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #F5B042;
+      margin-bottom: 12px;
+    }
+    .location-row, .date-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .location-option, .date-option {
+      background: #1b1b24;
+      padding: 0.7rem 1.2rem;
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid transparent;
+    }
+    .location-option.active, .date-option.active {
+      background: #F5B042;
+      color: #0a0a0e;
+      border-color: #ffcf7a;
+      box-shadow: 0 0 12px rgba(245,176,66,0.3);
+    }
+    .showtimes-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .time-chip {
+      background: #1b1b24;
+      padding: 0.6rem 1.4rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+    .time-chip.active {
+      background: #F5B042;
+      color: #0a0a0e;
+    }
+
+    .booking-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .seats-section {
+      flex: 2;
+      min-width: 280px;
+      background: #0c0c12;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid #2a2a32;
+    }
+    .screen-mock {
+      background: #1a1a24;
+      text-align: center;
+      padding: 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      color: #bbb;
+    }
+    .seats-container {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+      justify-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .seat {
+      width: 44px;
+      height: 44px;
+      background: #1f293d;
+      border-radius: 10px 10px 6px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.1s;
+      color: #eef1ff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+    .seat.available {
+      background: #232b38;
+      border-bottom: 3px solid #5f9e4e;
+    }
+    .seat.available:hover {
+      background: #3d506e;
+      transform: scale(1.03);
+    }
+    .seat.selected {
+      background: #F5B042;
+      color: #121212;
+      font-weight: bold;
+      border-bottom: 3px solid #ffdfaa;
+      box-shadow: 0 0 6px #F5B042;
+    }
+    .seat.booked {
+      background: #3a2e2a;
+      color: #7a6960;
+      cursor: not-allowed;
+      border-bottom: 3px solid #6b4e3a;
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    .legend {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 15px;
+      font-size: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .square {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      border-radius: 5px;
+    }
+
+    .order-summary {
+      flex: 1.2;
+      min-width: 260px;
+      background: #0e0e16;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid #F5B04230;
+      height: fit-content;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+    }
+    .total {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #F5B042;
+    }
+    hr {
+      border-color: #2a2a32;
+      margin: 1rem 0;
+    }
+    .btn-primary {
+      background: #F5B042;
+      border: none;
+      padding: 0.9rem;
+      width: 100%;
+      font-weight: 700;
+      border-radius: 2rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s;
+      color: #0a0a0e;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #F5B042;
+      color: #F5B042;
+      padding: 0.7rem;
+      width: 100%;
+      border-radius: 2rem;
+      margin-top: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: #e09a2e;
+      transform: translateY(-2px);
+    }
+    .badge-limit {
+      font-size: 0.7rem;
+      text-align: center;
+      margin-top: 16px;
+      color: #e0aa6e;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.7rem;
+      color: #555;
+      border-top: 1px solid #1e1e24;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 750px) {
+      .movie-hero {
+        padding: 0 1rem;
+      }
+      .seat {
+        width: 32px;
+        height: 32px;
+        font-size: 0.6rem;
+      }
+      .seats-container {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="logo-area">
+    <div class="logo"><i class="fas fa-ticket-alt"></i> CineStar</div>
+    <div class="tagline">best movie theater in Meldigia</div>
+  </div>
+  <div class="location-badge" id="locationSelectorTrigger">
+    <i class="fas fa-map-marker-alt"></i> <span id="selectedLocationDisplay">Şeğnåž</span> <i class="fas fa-chevron-down"></i>
+  </div>
+</div>
+
+<div class="movie-hero">
+  <div class="breadcrumb">
+    <a href="">Movies</a> <i class="fas fa-chevron-right"></i>
+    <a href="">Now Showing</a> <i class="fas fa-chevron-right"></i>
+    <span style="color:#F5B042">The Amazing Digital Circus: The Last Act</span>
+  </div>
+
+  <div class="full-width-poster">
+  <img src="poster.jpg" alt="Poster">
+</div>
+    <div class="movie-info">
+      <h1>The Amazing Digital Circus: The Last Act</h1>
+      <div class="movie-meta">
+        <span><i class="far fa-clock"></i> 1h 33 min</span>
+        <span><i class="fas fa-user-clock"></i> 12</span>
+        <span><i class="fas fa-film"></i> Animation / Drama / Thriller</span>
+      </div>
+      <div class="description">
+        The viral internet sensation "The Amazing Digital Circus" comes to its long-awaited conclusion in a feature-length theatrical release! This "Last Act" combines episode 8 with the all new, hour long episode 9 for fans to see before anyone else in the world. With Caine gone and the circus dark, the cast are left with only the mistakes and traumas of their pasts to keep them company. As the prospect of eternity closes in around them, they discover the truth about the Digital Circus and its history. Will they come to terms with what they uncover, or will they make… the other choice? Also, presumably at some point someone says something funny, because this ending can't be THAT depressing, can it?
+        <br><br>
+        <i class="fas fa-microphone-alt"></i> Versions:<br>
+English version (Meldigian subtitles).<br>Meldigian version (without subtitles).
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-panel">
+    <div class="booking-header">
+      <h3><i class="fas fa-calendar-check"></i> Select your tickets</h3>
+      <span style="font-size: 0.8rem;"><i class="fas fa-wifi"></i> Dolby Atmos · Reserved seating</span>
+    </div>
+
+    <div class="selector-grid">
+      <div class="selector-item" id="locationSelectorItem">
+        <div class="selector-label"><i class="fas fa-map-pin"></i> Location</div>
+        <div class="location-row" id="locationList"></div>
+      </div>
+      <div class="selector-item">
+        <div class="selector-label"><i class="far fa-calendar-alt"></i> Date</div>
+        <div class="date-row" id="dateList"></div>
+      </div>
+      <div class="selector-item">
+        <div class="selector-label"><i class="far fa-clock"></i> Showtime</div>
+        <div class="showtimes-group" id="showtimesGroup"></div>
+      </div>
+    </div>
+
+    <div class="booking-grid">
+      <div class="seats-section">
+        <div class="screen-mock"><i class="fas fa-tv"></i> Screen</div>
+        <div class="seats-container" id="seatsGrid"></div>
+        <div class="legend">
+          <span><div class="square" style="background: #232b38;"></div> Available</span>
+          <span><div class="square" style="background: #F5B042;"></div> Selected</span>
+          <span><div class="square" style="background: #3a2e2a;"></div> Booked</span>
+        </div>
+        <div class="badge-limit" id="limitHint"><i class="fas fa-info-circle"></i> Max 6 tickets per booking</div>
+      </div>
+
+      <div class="order-summary">
+        <h4 style="margin-bottom: 1rem;"><i class="fas fa-receipt"></i> Order summary</h4>
+        <div id="summaryDynamic">
+          <div class="summary-row"><span>🎬 Movie:</span><span id="movieName">The Amazing Digital Circus</span></div>
+          <div class="summary-row"><span>📍 Location:</span><span id="summaryLocation">Şeğnåž</span></div>
+          <div class="summary-row"><span>📅 Date:</span><span id="summaryDate">—</span></div>
+          <div class="summary-row"><span>⏰ Time:</span><span id="showtimeLabel">—</span></div>
+          <div class="summary-row"><span>💺 Seats:</span><span id="seatsListLabel">none</span></div>
+          <div class="summary-row"><span>🎟️ Tickets:</span><span id="ticketQty">0</span></div>
+          <hr>
+          <div class="summary-row"><span style="font-weight:bold;">Total:</span><span class="total" id="totalCost">$0</span></div>
+        </div>
+        <div style="background:#14141e; border-radius: 1rem; padding: 8px 12px; margin: 18px 0; font-size:0.8rem;" id="selectedPreview">
+          ⚡ Select your seats
+        </div>
+        <button class="btn-primary" id="confirmPurchase"><i class="fas fa-credit-card"></i> CONFIRM BOOKING</button>
+        <button class="btn-outline" id="clearSelectionBtn"><i class="fas fa-undo-alt"></i> Clear selection</button>
+      </div>
+    </div>
+  </div>
+  <footer>© 2013-2026 CineStar | All rights reserved.</footer>
+</div>
+
+<script>
+  // ---------- SINGLE MOVIE CONFIGURATION ----------
+  const SINGLE_MOVIE = {
+    title: "The Amazing Digital Circus: The Last Act",
+    price: 49,
+    icon: "🎪",
+    rating: "12"
+  };
+  
+  // Locations (formerly cities)
+  const locations = ["Öprăvem Çels Palace", "Žåsjjya Mall", "Şkarğler City", "Morüdem Çlåj Mall", "Qliřęvys Mega"];
+  
+  // Date range: June 4 – June 19, 2026
+  function generateDateRange(startDay, endDay, month = "June", year = 2026) {
+    const dates = [];
+    for (let d = startDay; d <= endDay; d++) {
+      const dateObj = new Date(year, 5, d); // month 5 = June
+      const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+      dates.push({
+        value: `${month} ${d}, ${year}`,
+        display: `${month} ${d} (${dayName})`,
+        day: d
+      });
+    }
+    return dates;
+  }
+  const dateOptions = generateDateRange(4, 19, "June", 2026);
+  
+  // Showtimes
+  const showtimesOptions = ["11:00 AM", "2:30 PM", "6:00 PM", "9:00 PM"];
+  
+  // SEAT CONFIGURATION (Rows A-F, 8 seats each)
+  const rowLetters = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const seatsPerRow = 8;
+  
+  // Initially booked seats (demo)
+  const initialBooked = new Set([
+    'A2', 'A3', 'B5', 'C1', 'C7', 'D4', 'E2', 'E6', 'F3', 'F8', 'B7'
+  ]);
+  
+  // GLOBAL STATE
+  let currentLocation = "Şeğnåž";
+  let currentDate = dateOptions[0].value;
+  let currentShowtime = showtimesOptions[0];
+  let bookedSeats = new Set(initialBooked);
+  let selectedSeats = new Set();
+  
+  const MAX_SELECTION = 6;
+  
+  // DOM elements
+  const locationListDiv = document.getElementById('locationList');
+  const dateListDiv = document.getElementById('dateList');
+  const showtimesContainer = document.getElementById('showtimesGroup');
+  const seatsGrid = document.getElementById('seatsGrid');
+  const movieNameSpan = document.getElementById('movieName');
+  const summaryLocationSpan = document.getElementById('summaryLocation');
+  const summaryDateSpan = document.getElementById('summaryDate');
+  const showtimeLabelSpan = document.getElementById('showtimeLabel');
+  const seatsListSpan = document.getElementById('seatsListLabel');
+  const ticketQtySpan = document.getElementById('ticketQty');
+  const totalCostSpan = document.getElementById('totalCost');
+  const selectedPreviewDiv = document.getElementById('selectedPreview');
+  const confirmBtn = document.getElementById('confirmPurchase');
+  const clearBtn = document.getElementById('clearSelectionBtn');
+  const limitHint = document.getElementById('limitHint');
+  const selectedLocationDisplay = document.getElementById('selectedLocationDisplay');
+  
+  // Helper: generate all seat ids
+  function getAllSeats() {
+    let seats = [];
+    for (let r of rowLetters) {
+      for (let i = 1; i <= seatsPerRow; i++) {
+        seats.push(`${r}${i}`);
+      }
+    }
+    return seats;
+  }
+  
+  // RENDER LOCATION SELECTOR
+  function renderLocations() {
+    locationListDiv.innerHTML = '';
+    locations.forEach(location => {
+      const locDiv = document.createElement('div');
+      locDiv.className = `location-option ${currentLocation === location ? 'active' : ''}`;
+      locDiv.innerHTML = `<i class="fas fa-map-pin"></i> ${location}`;
+      locDiv.addEventListener('click', () => {
+        if (currentLocation === location) return;
+        currentLocation = location;
+        selectedLocationDisplay.innerText = location;
+        selectedSeats.clear();
+        fullRefresh();
+      });
+      locationListDiv.appendChild(locDiv);
+    });
+  }
+  
+  // RENDER DATE SELECTOR
+  function renderDates() {
+    dateListDiv.innerHTML = '';
+    dateOptions.forEach(opt => {
+      const dateDiv = document.createElement('div');
+      dateDiv.className = `date-option ${currentDate === opt.value ? 'active' : ''}`;
+      dateDiv.innerHTML = `<i class="far fa-calendar"></i> ${opt.display}`;
+      dateDiv.addEventListener('click', () => {
+        if (currentDate === opt.value) return;
+        currentDate = opt.value;
+        selectedSeats.clear();
+        fullRefresh();
+      });
+      dateListDiv.appendChild(dateDiv);
+    });
+  }
+  
+  // RENDER SHOWTIMES
+  function renderShowtimes() {
+    showtimesContainer.innerHTML = '';
+    showtimesOptions.forEach(time => {
+      const timeDiv = document.createElement('div');
+      timeDiv.className = `time-chip ${currentShowtime === time ? 'active' : ''}`;
+      timeDiv.innerText = time;
+      timeDiv.addEventListener('click', () => {
+        if (currentShowtime === time) return;
+        currentShowtime = time;
+        selectedSeats.clear();
+        fullRefresh();
+      });
+      showtimesContainer.appendChild(timeDiv);
+    });
+  }
+  
+  // RENDER SEAT MAP
+  function renderSeatMap() {
+    seatsGrid.innerHTML = '';
+    const allSeats = getAllSeats();
+    allSeats.forEach(seatId => {
+      const isBooked = bookedSeats.has(seatId);
+      const isSelected = selectedSeats.has(seatId);
+      const seatDiv = document.createElement('div');
+      seatDiv.className = 'seat';
+      if (isBooked) {
+        seatDiv.classList.add('booked');
+        seatDiv.innerText = '✘';
+      } else if (isSelected) {
+        seatDiv.classList.add('selected');
+        seatDiv.innerText = seatId;
+      } else {
+        seatDiv.classList.add('available');
+        seatDiv.innerText = seatId;
+      }
+      if (!isBooked) {
+        seatDiv.addEventListener('click', (e) => {
+          e.stopPropagation();
+          handleSeatToggle(seatId);
+        });
+      }
+      seatsGrid.appendChild(seatDiv);
+    });
+  }
+  
+  // Seat toggle logic with max limit
+  function handleSeatToggle(seatId) {
+    if (bookedSeats.has(seatId)) return;
+    if (selectedSeats.has(seatId)) {
+      selectedSeats.delete(seatId);
+      renderSeatMap();
+      updateSummary();
+    } else {
+      if (selectedSeats.size >= MAX_SELECTION) {
+        limitHint.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Maximum 6 tickets only! Please remove some seats.`;
+        setTimeout(() => {
+          limitHint.innerHTML = `<i class="fas fa-info-circle"></i> Max 6 tickets per booking`;
+        }, 1800);
+        return;
+      }
+      selectedSeats.add(seatId);
+      renderSeatMap();
+      updateSummary();
+    }
+  }
+  
+  function updateSummary() {
+    movieNameSpan.innerText = `${SINGLE_MOVIE.title} (${SINGLE_MOVIE.price} cęř)`;
+    summaryLocationSpan.innerText = currentLocation;
+    summaryDateSpan.innerText = currentDate;
+    showtimeLabelSpan.innerText = currentShowtime;
+    const selectedArray = Array.from(selectedSeats).sort();
+    const qty = selectedArray.length;
+    ticketQtySpan.innerText = qty;
+    if (qty === 0) {
+      seatsListSpan.innerText = '—';
+      selectedPreviewDiv.innerHTML = '🎭 No seats selected';
+    } else {
+      seatsListSpan.innerText = selectedArray.join(', ');
+      selectedPreviewDiv.innerHTML = `✅ Selected seats: ${selectedArray.join(', ')}`;
+    }
+    const totalAmount = qty * SINGLE_MOVIE.price;
+    totalCostSpan.innerText = `${totalAmount} cęř`;
+  }
+  
+  function resetSelection() {
+    if (selectedSeats.size === 0) return;
+    selectedSeats.clear();
+    renderSeatMap();
+    updateSummary();
+  }
+  
+  function confirmBooking() {
+    if (selectedSeats.size === 0) {
+      alert("❌ Please select at least one seat.");
+      return;
+    }
+    const conflict = Array.from(selectedSeats).some(seat => bookedSeats.has(seat));
+    if (conflict) {
+      alert("Some selected seats have been just booked. Please refresh your selection.");
+      const stillValid = Array.from(selectedSeats).filter(s => !bookedSeats.has(s));
+      selectedSeats.clear();
+      stillValid.forEach(s => selectedSeats.add(s));
+      renderSeatMap();
+      updateSummary();
+      return;
+    }
+    selectedSeats.forEach(seat => {
+      bookedSeats.add(seat);
+    });
+    const totalCostVal = selectedSeats.size * SINGLE_MOVIE.price;
+    alert(`✨ Booking confirmed! ✨\nMovie: The Amazing Digital Circus: The Last Act\nLocation: ${currentLocation}\nDate: ${currentDate}\nTime: ${currentShowtime}\nSeats: ${Array.from(selectedSeats).join(', ')}\nTotal: ${totalCostVal} cęř\nThank you for choosing CineStar!`);
+    selectedSeats.clear();
+    renderSeatMap();
+    updateSummary();
+  }
+  
+  function fullRefresh() {
+    renderLocations();
+    renderDates();
+    renderShowtimes();
+    renderSeatMap();
+    updateSummary();
+  }
+  
+  confirmBtn.addEventListener('click', confirmBooking);
+  clearBtn.addEventListener('click', resetSelection);
+  
+  function init() {
+    renderLocations();
+    renderDates();
+    renderShowtimes();
+    renderSeatMap();
+    updateSummary();
+    selectedLocationDisplay.innerText = currentLocation;
+  }
+  init();
+</script>
+</body>
+</html>
